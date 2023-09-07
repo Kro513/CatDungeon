@@ -42,14 +42,26 @@ public class gameManager : MonoBehaviour
     public void OutputInterfaceText(string text)
     {
         InterfaceText.text = "벽에 부딪혔다...";
-		Invoke("ResetInterfaceText", 2.0f);
 	}
 
-	public void ResetInterfaceText(string text)
+	public void NPCInterfaceText(string text)
+	{
+		InterfaceText.text = "귀여운 회색 고양이다.";
+	}
+
+	public void BoxInterfaceText(string text)
+	{
+		InterfaceText.text = "상자가 굳게 닫혀있다.";
+	}
+
+	public void DeleteInterfaceText(string text)
 	{
 		InterfaceText.text = " ";
 	}
-    
+
+
+
+
 
 
 }

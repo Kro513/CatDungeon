@@ -6,6 +6,8 @@ TagManager:
   tags:
   - NpcList
   - Wall_Collision
+  - NPC_Collision
+  - Box_Collision
   layers:
   - Default
   - TransparentFX

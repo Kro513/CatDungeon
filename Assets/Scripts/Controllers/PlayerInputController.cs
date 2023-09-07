@@ -1,21 +1,87 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerInputController : CatCharacterController
 {
-   
     private Camera _camera;
 	private string text;
+	public GameObject panel;
+
 
 	public void OnCollisionEnter2D(Collision2D coll)
 	{
 		if (coll.gameObject.tag == "Wall_Collision")
 		{
-			gameManager.I.OutputInterfaceText(text);
+			StartCoroutine("UICoroutine");
 		}
 
+		if (coll.gameObject.tag == "NPC_Collision")
+		{
+			StartCoroutine("NPCCoroutine");
+		}
+
+		if (coll.gameObject.tag == "Box_Collision")
+		{
+			StartCoroutine("BoxCoroutine");
+		}
+	}
+	IEnumerator UICoroutine()
+	{
+		
+		ViewPanel();
+		gameManager.I.OutputInterfaceText(text);
+		
+
+		yield return new WaitForSeconds(2.0f);
+
+		ClosePanel();
+		gameManager.I.DeleteInterfaceText(text);
+	}
+
+	IEnumerator NPCCoroutine()
+	{
+
+		ViewPanel();
+		gameManager.I.NPCInterfaceText(text);
+
+
+		yield return new WaitForSeconds(2.0f);
+
+		ClosePanel();
+		gameManager.I.DeleteInterfaceText(text);
+	}
+
+	IEnumerator BoxCoroutine()
+	{
+
+		ViewPanel();
+		gameManager.I.BoxInterfaceText(text);
+
+
+		yield return new WaitForSeconds(2.0f);
+
+		ClosePanel();
+		gameManager.I.DeleteInterfaceText(text);
+	}
+
+
+
+
+
+
+	public void ViewPanel()
+	{
+		panel.SetActive(true);
+	}
+
+	public void ClosePanel()
+	{
+		panel.SetActive(false);
 	}
 
 
